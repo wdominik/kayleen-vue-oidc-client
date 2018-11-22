@@ -10,6 +10,10 @@ export default settings => {
     ...settings
   })
 
+  oidcUserManager.events.addAccessTokenExpired(async () => {
+    await oidcUserManager.signoutRedirect()
+  })
+
   return {
     actions: {
       async check({ getters }, payload) {
