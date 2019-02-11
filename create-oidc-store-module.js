@@ -98,8 +98,10 @@ export default settings => {
           return `${state.user.profile['given_name']} ${state.user.profile['family_name']}`
         } else if (state.user.profile.username != null) {
           return state.user.profile.username
-        } else {
+        } else if (state.user.profile.email != null) {
           return state.user.profile.email
+        } else {
+          return state.user.profile.name
         }
       }
     },
