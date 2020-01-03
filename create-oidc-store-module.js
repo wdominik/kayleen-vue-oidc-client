@@ -54,6 +54,21 @@ export default settings => {
 
         return state.user['access_token']
       },
+      email: state => {
+        if (state.user == null || state.user.profile == null) {
+          return null
+        }
+
+        if (state.user.profile.email != null) {
+          return state.user.profile.email
+        }
+
+        if (state.user.profile.emails != null && state.user.profile.emails.length !== 0) {
+          return state.user.profile.emails[0]
+        }
+
+        return null
+      },
       hasRole: state => role => {
         if (state.user == null || state.user.profile == null || state.user.profile.roles == null) {
           return false
