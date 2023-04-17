@@ -40,7 +40,7 @@ export default settings => {
       async signOut() {
         await oidcUserManager.signoutRedirect()
       },
-      async signOutCallback({ commit }) {
+      async signOutCallback({ commit }) {
         await oidcUserManager.signoutRedirectCallback()
 
         commit('setUser', { user: null })
@@ -69,8 +69,23 @@ export default settings => {
 
         return null
       },
+      hasPermission: state => permission => {
+        if (state.user == null || state.user.profile == null || state.user.profile.permission == null) {
+          return false
+        }
+
+        if (typeof state.user.profile.permissions === 'string') {
+          return state.user.profile.permissions === role
+        }
+
+        if (Array.isArray(state.user.profile.permissions)) {
+          return state.user.profile.permissions.indexOf(permission) != -1
+        }
+
+        return false
+      },
       hasRole: state => role => {
-        if (state.user == null || state.user.profile == null || state.user.profile.roles == null) {
+        if (state.user == null || state.user.profile == null || state.user.profile.roles == null) {
           return false
         }
 

@@ -5,7 +5,7 @@
     "url": "https://wachter.biz"
   },
   "dependencies": {
-    "oidc-client": "^1.10.1"
+    "oidc-client": "^1.11.5"
   },
   "license": "UNLICENSED",
   "main": "index.js",
